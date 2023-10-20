@@ -59,3 +59,4 @@ In the competition setting the value of the `-decot` flag was 120.
 - `-WE` - enable weighted model counting with arbitrary precision.
 - `-WD` - enable weighted model counting with double precision.
 - `-prec` - the number of digits in output of weighted model counting. Does not affect the internal precision.
+- `-PROB` - interprets weights as probabilities. When a variable's weight is specified, it should follow weight(l) + weight(-l) = 1.0. When unspecified, it assumes w(l) = w(-l) = 1.0. 

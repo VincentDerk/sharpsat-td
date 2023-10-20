@@ -1,0 +1,32 @@
+c Probabilistic WMC example by Vincent Derkinderen
+c this represents the problem
+c x <=> (a,b) v (a,c)
+c with probability a,b,c each 0.5
+c and then querying the probability of x (hence 6 is a unit clause)
+p cnf 6 10
+-1 -2 3 0
+-3 1 0
+-3 2 0
+-1 -4 5 0
+-5 1 0
+-5 4 0
+3 5 -6 0
+6 -3 0
+6 -5 0
+6 0
+c p weight 1 0.5 0
+c p weight -1 0.5 0
+c p weight 2 0.5 0
+c p weight -2 0.5 0
+c p weight 3 1.0 0
+c p weight -3 1.0 0
+c p weight 4 0.5 0
+c p weight -4 0.5 0
+c p weight 5 1.0 0
+c p weight -5 1.0 0
+c p weight 6 1.0 0
+c p weight -6 1.0 0
+c c name(1) = a
+c c name(2) = b
+c c name(4) = c
+c c name(6) = x

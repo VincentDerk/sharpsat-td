@@ -93,7 +93,11 @@ Instance::Instance(int vars_, vector<vector<Lit>> clauses_) : vars(vars_), claus
 
 Instance::Instance(int vars_) : vars(vars_) {}
 
-Instance::Instance(string input_file, bool weighted_) {
+Instance::Instance(string input_file, bool weighted_, int weight_format) {
+    // weight_format:
+    // =1 assumes w(l) + w(-l) = 1.0 and undefined weights are 1.0
+    // =2 no restrictions on weights, but undefined weights are 1.0
+
 	weighted = weighted_;
 	std::ifstream in(input_file);
 	string tmp;
@@ -107,15 +111,23 @@ Instance::Instance(string input_file, bool weighted_) {
 		auto tokens = Tokens(tmp);
 		if (tokens.empty()) {
 			continue;
-		} else if (weighted && format == 1 && tokens.size() == 6 && tokens[0] == "c" && tokens[1] == "p" && tokens[2] == "weight") {
-			assert(IsInt(tokens[3], -vars, vars));
-			int dlit = stoi(tokens[3]);
-			double w = stod(tokens[4]);
-			assert(dlit != 0);
-			Lit lit = FromDimacs(dlit);
-			weights[lit] = w;
-			weights[Neg(lit)] = (double)1-w;
-			read_weights++;
+		} else if (weighted && weight_format == 1 && format == 1 && tokens.size() == 6 && tokens[0] == "c" && tokens[1] == "p" && tokens[2] == "weight") {
+            assert(IsInt(tokens[3], -vars, vars));
+            int dlit = stoi(tokens[3]);
+            double w = stod(tokens[4]);
+            assert(dlit != 0);
+            Lit lit = FromDimacs(dlit);
+            weights[lit] = w;
+            weights[Neg(lit)] = (double) 1 - w;
+            read_weights++;
+        } else if (weighted && weight_format == 2 && format == 1 && tokens.size() == 6 && tokens[0] == "c" && tokens[1] == "p" && tokens[2] == "weight") {
+            assert(IsInt(tokens[3], -vars, vars));
+            int dlit = stoi(tokens[3]);
+            double w = stod(tokens[4]);
+            assert(dlit != 0);
+            Lit lit = FromDimacs(dlit);
+            weights[lit] = w;
+            read_weights++;
 		} else if (tokens[0] == "c") {
 			continue;
 		} else if (format == 0 && tokens.size() == 4 && tokens[0] == "p" && tokens[1] == "cnf") {

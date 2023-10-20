@@ -89,14 +89,20 @@ int main(int argc, char *argv[]) {
   uint64_t max_cache = 0;
 
   int weighted = 0;
+  // weight_format
+  // 1: original behavior assuming w(l) + W(-l) = 1.0 and undefined weights are 1.0
+  // 2: any weight allowed. Unspecified weight is 1.0.
+  int weight_format = 2;
 
   for (int i = 1; i < argc; i++) {
     if (strcmp(argv[i], "-WD") == 0) {
       assert(weighted == 0);
       weighted = 1;
     } else if (strcmp(argv[i], "-WE") == 0) {
-      assert(weighted == 0);
-      weighted = 2;
+        assert(weighted == 0);
+        weighted = 2;
+    } else if (strcmp(argv[i], "-PROB") == 0) {
+        weight_format = 1;
     } else if (strcmp(argv[i], "-tmpdir") == 0) {
       if (argc <= i + 1) {
         cout << " wrong parameters" << endl;
@@ -158,7 +164,7 @@ int main(int argc, char *argv[]) {
   assert(decot > 0.0001 && decot < 10000);
 
   if (weighted == 0) {
-    sspp::Instance ins(input_file, false);
+    sspp::Instance ins(input_file, false, 1);
     sspp::Preprocessor ppp;
     ppp.SetMaxGTime(150);
     ppp.SetMaxSparsTime(120);
@@ -198,7 +204,7 @@ int main(int argc, char *argv[]) {
     PrintExact(ans);
     return 0;
   } else if (weighted == 1 || weighted == 2) {
-    sspp::Instance ins(input_file, true);
+    sspp::Instance ins(input_file, true, weight_format);
     sspp::Preprocessor ppp;
     ins = ppp.Preprocess(ins, "FPVE");
     ins.UpdClauseInfo();

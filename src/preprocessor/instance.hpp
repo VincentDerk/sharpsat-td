@@ -9,7 +9,7 @@
 
 namespace sspp {
 struct Instance {
-	Instance(string input_file, bool weighted_);
+	Instance(string input_file, bool weighted_, int weight_format);
 	Instance(int vars_);
 	Instance(int vars_, vector<vector<Lit>> clauses_);
 
