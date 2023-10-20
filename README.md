@@ -11,7 +11,7 @@ See a detailed description in [description.pdf](https://github.com/Laakeri/sharp
 
 # Forked
 
-This project is a fork of [Laakeri/sharpsat-td](https://github.com/Laakeri/sharpsat-td) to generalize the input of the weighted model counting support. 
+This project is a fork of [Laakeri/sharpsat-td](https://github.com/Laakeri/sharpsat-td), to generalize input support of the weighted model counting, allowing general weights.
 
 The original version assumes that the weight of variable is either `w(l) = w(-l) = 1.0` or, `w(l) + w(-l) = 1`. We **will** change this assumption, and update this line when the change has been finalized.
 
