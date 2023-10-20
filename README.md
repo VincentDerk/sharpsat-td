@@ -9,6 +9,9 @@ SharpSAT-TD is based on [SharpSAT](https://github.com/marcthurley/sharpSAT), wit
 SharpSAT-TD supports exact model counting, exact weighted model counting with arbitrary precision floats, and exact weighted model counting with doubles.
 See a detailed description in [description.pdf](https://github.com/Laakeri/sharpsat-td/blob/main/description.pdf).
 
+# Forked
+
+This project is a fork of [Laakeri/sharpsat-td](https://github.com/Laakeri/sharpsat-td). When weighted model counting, that version assumes weight 1.0 implies the fact must be true. This fork intends to remove that assumption to support Tseitin variables whose positive literal l and negative literal -l may both have weight 1.0. In the original version, the assumption would then imply that both l and -l must be true, which results in an UNSAT result.
 
 # Compiling
 
