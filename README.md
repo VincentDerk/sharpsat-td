@@ -11,7 +11,12 @@ See a detailed description in [description.pdf](https://github.com/Laakeri/sharp
 
 # Forked
 
-This project is a fork of [Laakeri/sharpsat-td](https://github.com/Laakeri/sharpsat-td). When weighted model counting, that version assumes weight 1.0 implies the fact must be true. This fork intends to remove that assumption to support Tseitin variables whose positive literal l and negative literal -l may both have weight 1.0. In the original version, the assumption would then imply that both l and -l must be true, which results in an UNSAT result.
+This project is a fork of [Laakeri/sharpsat-td](https://github.com/Laakeri/sharpsat-td) to generalize the input of the weighted model counting support. 
+
+The original version assumes that the weight of variable is either `w(l) = w(-l) = 1.0` or, `w(l) + w(-l) = 1`. We **will** change this assumption, and update this line when the change has been finalized.
+
+Beware, in the original version, in case you want to use `w(l) = W(-l) = 1`, simply do not pass any weight for l. Otherwise it will try to set w(-l) to 1.0 - 1.0 = 0.0.
+
 
 # Compiling
 
