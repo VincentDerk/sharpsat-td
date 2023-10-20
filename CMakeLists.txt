@@ -16,7 +16,7 @@ set(CMAKE_SHARED_LIBRARY_LINK_CXX_FLAGS)
 set(BUILD_SHARED_LIBS OFF)
 endif(STATIC)
 
-set(CMAKE_CXX_FLAGS "-std=c++11 -O3 -Wall -Wextra -Wshadow -g -Wfatal-errors -Wno-sign-compare -Wno-literal-suffix")
+set(CMAKE_CXX_FLAGS "-std=c++11 -O3 -Wall -Wextra -Wshadow -g -O0 -Wfatal-errors -Wno-sign-compare -Wno-literal-suffix")
 
 SET(CMAKE_C_FLAGS "-std=c99 -Wall -msse4.1 -mpclmul")
 
@@ -24,6 +24,7 @@ find_library(GMP_LIB gmp)
 find_library(GMPXX_LIB gmpxx)
 find_library(MPFR_LIB mpfr)
 
+add_definitions( -DMPFR_USE_NO_MACRO )
 add_subdirectory(flowcutter)
 
 SET(SOURCES 
